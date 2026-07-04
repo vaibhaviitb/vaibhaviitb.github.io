@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  ════════════════════════════════════════════════════════════════════
+  AI My Task — landing page (https://aimytask.xyz)
+  BEFORE PUBLISHING, find-and-replace:
+    1. "91XXXXXXXXXX" → your WhatsApp business number (3 wa.me links)
+  ════════════════════════════════════════════════════════════════════
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI My Task — Send bills on WhatsApp. Get your spreadsheet back.</title>
+<meta name="description" content="Photograph your invoices and receipts, send them on WhatsApp, type Convert — and get a clean, math-checked Excel sheet back. No app. No uploads. No data entry.">
+<meta property="og:title" content="AI My Task — your data-entry assistant on WhatsApp">
+<meta property="og:description" content="Send bills as photos on WhatsApp. Get a clean, math-checked Excel sheet back in minutes.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aimytask.xyz/">
+<link rel="canonical" href="https://aimytask.xyz/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#122B22;            /* deep ledger green-black */
+    --ink-soft:#3E554C;
+    --paper:#FAF6EE;          /* warm paper */
+    --paper-deep:#F1EADC;
+    --card:#FFFFFF;
+    --wa:#1FAF5A;             /* WhatsApp green */
+    --wa-deep:#128C4B;
+    --gold:#C99A3C;           /* ledger gold accent */
+    --line:#E4DCCB;
+    --bubble-out:#DCF8C6;
+    --chat-bg:#EAE2D4;
+    --radius:14px;
+    --shadow:0 10px 30px rgba(18,43,34,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Karla',system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.15;font-weight:600}
+  a{color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ── nav ── */
+  nav{position:sticky;top:0;z-index:50;background:rgba(250,246,238,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:1.35rem;font-weight:700;text-decoration:none}
+  .logo-mark{width:34px;height:34px;border-radius:9px;background:var(--wa);display:grid;place-items:center;color:#fff;font-size:1.05rem;box-shadow:inset 0 -3px 0 rgba(0,0,0,.15)}
+  .nav-links{display:flex;gap:26px;align-items:center;font-weight:500}
+  .nav-links a{text-decoration:none;color:var(--ink-soft);font-size:.95rem}
+  .nav-links a:hover{color:var(--ink)}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#fff !important;padding:11px 22px;border-radius:999px;text-decoration:none;font-weight:700;font-size:.95rem;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(31,175,90,.35);transition:transform .15s ease, box-shadow .15s ease}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(31,175,90,.45)}
+  .btn.ghost{background:transparent;color:var(--ink) !important;border:1.5px solid var(--ink);box-shadow:none}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper) !important}
+
+  /* ── hero ── */
+  header.hero{padding:72px 0 40px;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .eyebrow{display:inline-block;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--wa-deep);background:#E4F5EA;border:1px solid #BFE6CD;padding:6px 14px;border-radius:999px;margin-bottom:22px}
+  .hero h1{font-size:clamp(2.3rem,5vw,3.6rem);margin-bottom:20px}
+  .hero h1 em{font-style:italic;color:var(--wa-deep)}
+  .hero p.lead{font-size:1.18rem;color:var(--ink-soft);max-width:34rem;margin-bottom:30px}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+  .hero-note{font-size:.88rem;color:var(--ink-soft)}
+  .hero-note strong{color:var(--ink)}
+
+  /* ── phone mockup ── */
+  .phone{width:320px;margin:0 auto;background:#111;border-radius:38px;padding:10px;box-shadow:var(--shadow), 0 30px 60px rgba(18,43,34,.18)}
+  .screen{background:var(--chat-bg);border-radius:30px;overflow:hidden}
+  .chat-top{background:var(--wa-deep);color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px}
+  .avatar{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--wa-deep);display:grid;place-items:center;font-weight:700;font-family:'Fraunces',serif}
+  .chat-top .name{font-weight:700;font-size:.92rem;line-height:1.1}
+  .chat-top .status{font-size:.72rem;opacity:.85}
+  .chat{padding:14px 10px 18px;display:flex;flex-direction:column;gap:9px;min-height:400px}
+  .bubble{max-width:82%;padding:8px 12px;border-radius:12px;font-size:.83rem;line-height:1.45;box-shadow:0 1px 1px rgba(0,0,0,.08);position:relative}
+  .in{background:#fff;align-self:flex-start;border-top-left-radius:4px}
+  .out{background:var(--bubble-out);align-self:flex-end;border-top-right-radius:4px}
+  .meta{display:block;text-align:right;font-size:.62rem;color:#7a8a80;margin-top:3px}
+  .meta .tick{color:#4FB6EC}
+  .img-bubble{padding:5px}
+  .fake-invoice{width:190px;height:120px;border-radius:8px;background:
+      repeating-linear-gradient(#fff, #fff 14px, #eee 15px),
+      #fff;
+    border:1px solid #ddd;position:relative;overflow:hidden}
+  .fake-invoice::before{content:"INVOICE";position:absolute;top:7px;left:10px;font-size:.6rem;font-weight:700;letter-spacing:.1em;color:#999}
+  .fake-invoice::after{content:"₹ 4,730.00";position:absolute;bottom:7px;right:10px;font-size:.68rem;font-weight:700;color:var(--ink)}
+  .file-bubble{display:flex;align-items:center;gap:10px;padding:10px 12px}
+  .xlsx-icon{width:34px;height:40px;border-radius:6px;background:#1D6F42;color:#fff;display:grid;place-items:center;font-size:.62rem;font-weight:700;flex-shrink:0}
+  .file-bubble .fname{font-size:.78rem;font-weight:700}
+  .file-bubble .fsize{font-size:.66rem;color:#7a8a80}
+
+  /* ── sections ── */
+  section{padding:76px 0}
+  .sec-head{text-align:center;max-width:44rem;margin:0 auto 48px}
+  .sec-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem);margin-bottom:14px}
+  .sec-head p{color:var(--ink-soft);font-size:1.05rem}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;box-shadow:0 4px 16px rgba(18,43,34,.05)}
+  .step .num{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:12px}
+  .step h3{font-size:1.15rem;margin-bottom:8px}
+  .step p{color:var(--ink-soft);font-size:.95rem}
+
+  /* docs strip */
+  .docs-strip{background:var(--ink);color:var(--paper);border-radius:20px;padding:40px 36px;display:flex;flex-wrap:wrap;gap:14px 34px;align-items:center;justify-content:center}
+  .docs-strip span{font-family:'Fraunces',serif;font-size:1.15rem;opacity:.95;display:flex;align-items:center;gap:9px}
+  .docs-strip .dot{width:7px;height:7px;border-radius:50%;background:var(--wa);display:inline-block}
+
+  /* trust grid */
+  .trust{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .trust-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .trust-card .icon{font-size:1.5rem;margin-bottom:10px;display:block}
+  .trust-card h3{font-size:1.08rem;margin-bottom:7px}
+  .trust-card p{color:var(--ink-soft);font-size:.94rem}
+
+  /* audience */
+  .aud{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .aud-card{background:var(--paper-deep);border-radius:var(--radius);padding:26px;border:1px solid var(--line)}
+  .aud-card h3{font-size:1.08rem;margin-bottom:8px}
+  .aud-card p{font-size:.93rem;color:var(--ink-soft)}
+
+  /* faq */
+  .faq{max-width:46rem;margin:0 auto}
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:12px}
+  summary{cursor:pointer;font-weight:700;font-size:1rem;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:'Fraunces',serif;font-size:1.3rem;color:var(--gold);transition:transform .2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{margin-top:10px;color:var(--ink-soft);font-size:.95rem}
+
+  /* final cta */
+  .final{background:var(--wa-deep);color:#fff;border-radius:24px;text-align:center;padding:64px 32px;position:relative;overflow:hidden}
+  .final::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 80% -10%, rgba(255,255,255,.14), transparent)}
+  .final h2{font-size:clamp(1.8rem,3.5vw,2.5rem);margin-bottom:14px;position:relative}
+  .final p{opacity:.92;max-width:34rem;margin:0 auto 28px;position:relative}
+  .final .btn{background:#fff;color:var(--wa-deep) !important;box-shadow:0 6px 20px rgba(0,0,0,.2);position:relative}
+
+  footer{padding:44px 0 54px;color:var(--ink-soft);font-size:.9rem}
+  .foot-in{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:44px}
+    .steps,.aud{grid-template-columns:1fr}
+    .trust{grid-template-columns:1fr}
+    .nav-links a:not(.btn){display:none}
+    section{padding:56px 0}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#top">
+      <span class="logo-mark">₹</span> AI My Task
+    </a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#trust">Why trust it</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn" href="https://wa.me/91XXXXXXXXXX?text=Hi%2C%20I%27d%20like%20early%20access" target="_blank" rel="noopener">Try on WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Early access · India</span>
+      <h1>Send your bills on WhatsApp.<br>Get your <em>spreadsheet</em> back.</h1>
+      <p class="lead">
+        Photograph invoices, receipts and statements — send them to AI My Task like you'd
+        send them to a friend. Type <strong>Convert</strong>. In minutes, a clean,
+        math-checked Excel sheet lands right back in your chat.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn" href="https://wa.me/918974145901?text=Hi%2C%20I%27d%20like%20early%20access" target="_blank" rel="noopener">
+          Join early access →
+        </a>
+        <a class="btn ghost" href="#how">See how it works</a>
+      </div>
+      <p class="hero-note">
+        <strong>No app to install. No website to log in to. No email.</strong><br>
+        If you can use WhatsApp, you already know how to use AI My Task.
+      </p>
+    </div>
+
+    <!-- phone chat mockup -->
+    <div class="phone" aria-hidden="true">
+      <div class="screen">
+        <div class="chat-top">
+          <div class="avatar">A</div>
+          <div>
+            <div class="name">AI My Task</div>
+            <div class="status">your data-entry assistant</div>
+          </div>
+        </div>
+        <div class="chat">
+          <div class="bubble out img-bubble">
+            <div class="fake-invoice"></div>
+            <span class="meta">10:41 <span class="tick">✓✓</span></span>
+          </div>
+          <div class="bubble in">
+            Got it — <b>3 files</b> ready. Send more, or type <b>Convert</b>.
+            <span class="meta">10:41</span>
+          </div>
+          <div class="bubble out">
+            Convert
+            <span class="meta">10:42 <span class="tick">✓✓</span></span>
+          </div>
+          <div class="bubble in">
+            Converting to <b>Invoices</b> with columns: vendor, invoice no,
+            date, item, qty, price, total…
+            <span class="meta">10:42</span>
+          </div>
+          <div class="bubble in">
+            Done ✅ <b>14 rows added.</b> 1 flagged for review,
+            1 duplicate skipped. Your updated sheet is attached.
+            <span class="meta">10:43</span>
+          </div>
+          <div class="bubble in file-bubble">
+            <div class="xlsx-icon">XLSX</div>
+            <div>
+              <div class="fname">Invoices_updated.xlsx</div>
+              <div class="fsize">2 pages · 38 KB</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Three steps. Zero typing.</h2>
+      <p>The whole product lives inside one WhatsApp chat.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Snap &amp; send</h3>
+        <p>Photograph your bills — or forward the PDFs suppliers already send you.
+           Crumpled, angled, thermal-printed: send them as they are.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Type “Convert”</h3>
+        <p>When you're done uploading, one word starts the work. Adding to last
+           week's sheet? Just tap the sheet you want from the menu.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Get your Excel</h3>
+        <p>A clean spreadsheet comes back in the same chat — every line item in
+           its column, totals checked, duplicates skipped.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="docs-strip">
+      <span><i class="dot"></i>Supplier invoices</span>
+      <span><i class="dot"></i>Purchase receipts</span>
+      <span><i class="dot"></i>Delivery challans</span>
+      <span><i class="dot"></i>Account statements</span>
+      <span><i class="dot"></i>Photos or PDFs</span>
+    </div>
+  </div>
+</section>
+
+<section id="trust">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Built to be checked, not just believed</h2>
+      <p>AI reads your documents — but arithmetic decides what gets trusted.
+         Anything that doesn't add up is flagged, never hidden.</p>
+    </div>
+    <div class="trust">
+      <div class="trust-card">
+        <span class="icon">🧮</span>
+        <h3>Every total is math-checked</h3>
+        <p>Quantity × price must equal the line total; line totals must sum to the
+           bill. Rows that don't reconcile are marked <b>Needs Review</b> —
+           you check five rows, not five hundred.</p>
+      </div>
+      <div class="trust-card">
+        <span class="icon">🔁</span>
+        <h3>Duplicates caught automatically</h3>
+        <p>Sent the same invoice twice? AI My Task recognises it by vendor, number,
+           date and amount — and skips it, telling you it did.</p>
+      </div>
+      <div class="trust-card">
+        <span class="icon">🔒</span>
+        <h3>Private by design</h3>
+        <p>Your spreadsheet is delivered only to your WhatsApp — never a public
+           link anyone could open. Uploaded files are automatically deleted
+           after 30 days.</p>
+      </div>
+      <div class="trust-card">
+        <span class="icon">📒</span>
+        <h3>One sheet that grows with you</h3>
+        <p>Invoices, receipts and statements each get their own tab. New kinds of
+           columns (HSN codes, batch numbers…) are added on — your old rows are
+           never disturbed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Made for businesses that run on paper</h2>
+      <p>If your desk has a spike file of bills, AI My Task was built for you.</p>
+    </div>
+    <div class="aud">
+      <div class="aud-card">
+        <h3>🍲 Restaurants &amp; cafés</h3>
+        <p>Daily vegetable, meat and grocery bills from a dozen suppliers —
+           tracked without hiring anyone to type them in.</p>
+      </div>
+      <div class="aud-card">
+        <h3>🏪 Kirana &amp; retail</h3>
+        <p>Purchase invoices become a running ledger you can actually search,
+           sort and total at month-end.</p>
+      </div>
+      <div class="aud-card">
+        <h3>📦 Traders &amp; distributors</h3>
+        <p>Challans and statements from every party, in one spreadsheet — with
+           duplicates and mismatched totals surfaced for you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Questions, answered</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Do I need to install anything?</summary>
+        <p>No. AI My Task is a WhatsApp contact. You send files to a number and get
+           your spreadsheet back in the same chat. There is no app, no website
+           login, and we never ask for your email.</p>
+      </details>
+      <details>
+        <summary>What if the AI reads something wrong?</summary>
+        <p>Every extracted row is cross-checked with arithmetic (quantities ×
+           prices vs totals). Rows that don't reconcile — or that were hard to
+           read — are marked <b>Needs Review</b> in your sheet, so you review a
+           handful of flagged rows instead of re-checking everything.</p>
+      </details>
+      <details>
+        <summary>What file types can I send?</summary>
+        <p>Photos (JPG/PNG) and PDFs up to 6 pages. Handwritten and
+           thermal-printed bills work too — unclear values are flagged rather
+           than guessed.</p>
+      </details>
+      <details>
+        <summary>Where is my data stored? Who can see it?</summary>
+        <p>Your uploaded files are kept only long enough to process them and are
+           automatically deleted after 30 days. Your spreadsheet is sent only to
+           your WhatsApp number — we never create public links, and your data is
+           never shared or sold.</p>
+      </details>
+      <details>
+        <summary>Can I keep adding to the same sheet every week?</summary>
+        <p>Yes — that's the point. Each time you convert, choose an existing
+           sheet from the menu or start a new one. AI My Task appends new rows,
+           skips duplicates, and keeps your columns consistent.</p>
+      </details>
+      <details>
+        <summary>What does it cost?</summary>
+        <p>AI My Task is in early access. Early users help shape the product and get
+           preferential pricing when plans launch. Join the list on WhatsApp to
+           be first in line.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="final">
+      <h2>Fire your spike file.</h2>
+      <p>Join early access and turn this week's stack of bills into a
+         spreadsheet — from the chat app you already live in.</p>
+      <a class="btn" href="https://wa.me/91XXXXXXXXXX?text=Hi%2C%20I%27d%20like%20early%20access" target="_blank" rel="noopener">
+        Message us on WhatsApp →
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>© 2026 AI My Task · Made in India 🇮🇳</div>
+    <div><a href="mailto:helpdesk@aimytask.com">helpdesk@aimytask.com</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
